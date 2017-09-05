@@ -1,3 +1,11 @@
+//
+function help(){
+  console.log("checkAllBalances()");
+  console.log("mineBlocks()");
+  console.log("checkTransectionsInBlock()");
+  console.log("checkGasLimit()");
+  console.log("addPeer(ip)");
+}
 //Check total balance of all accounts
 function checkAllBalances() {
     var totalBal = 0;
