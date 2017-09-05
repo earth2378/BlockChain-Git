@@ -1,0 +1,19 @@
+	init
+geth --datadir "E:\blockchain\database\node c" --networkid 10701 --nodiscover --nat none --identity node3 init C:\Users\ZephyR\Desktop\genesis.json
+
+	node1
+geth --datadir "E:\blockchain\database\node a" --networkid 10701 --nodiscover --nat none --identity node1 --rpc --rpcapi "web3, etc, personal" --rpccorsdomain "*" console
+
+	node2
+geth --datadir "E:\blockchain\database\node b" --networkid 10701 --nodiscover --nat none --identity node2 --rpc --rpcapi "web3, etc, personal" --rpccorsdomain "*" --rpcport 2222 --port 30302 --ipcpath node/geth.ipc console
+
+	node3
+geth --datadir "E:\blockchain\database\node c" --networkid 10701 --nodiscover --nat none --identity node3 --rpc --rpcapi "web3, etc, personal" --rpccorsdomain "*" --rpcport 2221 --port 30301 --ipcpath node/geth.ipc console
+
+
+admin.addPeer("enode://e8f4778e06bb937b13d49c7fd696aaa80ed780ec5c587bf2cd4442d9c08a60772b4fb3d0ad732818c179b1b9d77da2d062733046ebf1b2cd2bdc082820f53cb6@++:30303?discport=0")
+
+
+admin.importChain("E:/Blockchain/Database/chain.txt")
+loadScript("E:/Blockchain/Database/getload.js")
+
