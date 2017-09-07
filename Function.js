@@ -52,6 +52,12 @@ function checkGasLimit(){
     console.log("Block : "+count+"\t, GasLimit : "+gasLimit);
   }
 }
+function checkLatestGasLimit(){
+  var info = web3.eth.getBlock(eth.blockNumber);
+  var gasLimit = info.gasLimit;
+  console.log("Block : "+eth.blockNumber+"\t, GasLimit : "+gasLimit);
+
+}
 
 //Shotcut for add node
 function addPeer(input){
