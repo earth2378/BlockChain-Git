@@ -1,16 +1,22 @@
 	init
-geth --datadir "E:\blockchain\database\node c" --networkid 10701 --nodiscover --nat none --identity node3 init C:\Users\ZephyR\Desktop\genesis.json
+==geth --datadir "E:\blockchain\database\node c" --networkid 10701 --nodiscover --nat none --identity node3 init C:\Users\ZephyR\Desktop\genesis.json
 
 	node1
-geth --datadir "E:\blockchain\database\node a" --networkid 10701 --nodiscover --nat none --identity node1 --rpc --rpcapi "web3, etc, personal" --rpccorsdomain "*" console
+geth --datadir "E:\blockchain\database\node a" --networkid 10701 --nodiscover --nat none --identity node1 --rpc --rpcapi "web3, eth, personal,net" --rpccorsdomain "*" console
 
 	node2
-geth --datadir "E:\blockchain\database\node b" --networkid 10701 --nodiscover --nat none --identity node2 --rpc --rpcapi "web3, etc, personal" --rpccorsdomain "*" --rpcport 2222 --port 30302 --ipcpath node/geth.ipc console
+geth --datadir "E:\blockchain\database\node b" --networkid 10701 --nodiscover --nat none --identity node2 --rpc --rpcapi "web3, eth, personal,net" --rpccorsdomain "*" --rpcport 2222 --port 30302 --ipcpath node/geth.ipc console
 
 	node3
-geth --datadir "E:\blockchain\database\node c" --networkid 10701 --nodiscover --nat none --identity node3 --rpc --rpcapi "web3, etc, personal" --rpccorsdomain "*" --rpcport 2221 --port 30301 --ipcpath node/geth.ipc console
+geth --datadir "E:\blockchain\database\node c" --networkid 10701 --nodiscover --nat none --identity node3 --rpc --rpcapi "web3, etc, personal" --rpccorsdomain "*" --rpcport 2221 --port 30301 --ipcdisable   console
 
 
 personal.unlockAccount(eth.accounts[0])
-admin.importChain("E:/Blockchain/Database/chain.txt")
 loadScript("E:/Blockchain/Database/Blockchain git/Function.js")
+loadScript("E:/Blockchain/Contract/VendingMachine.js")
+loadScript("E:/Blockchain/Database/Blockchain git/storage.js")
+loadScript("E:/Blockchain/Contract/BlockFile.js")
+web3.eth.defaultAccount = eth.accounts[0]
+
+"C:/Program Files\Mist\mist.exe" --ipc \\.\pipe\geth.ipc
+"C:/Program Files\Mist\mist.exe" --rpc http://127.0.0.1:8545

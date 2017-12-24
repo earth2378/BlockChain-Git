@@ -1,10 +1,14 @@
+web3.eth.defaultAccount = eth.accounts[0];
+var status = true;
 //
 function help(){
-  console.log("checkAllBalances()");
-  console.log("mineBlocks()");
-  console.log("checkTransectionsInBlock()");
-  console.log("checkGasLimit()");
-  console.log("addPeer(ip)");
+  console.log("  checkAllBalances()");
+  console.log("  mineBlock()");
+  console.log("  mineBlocks(i)");
+  console.log("  checkTransectionsInBlock()");
+  console.log("  checkGasLimit()");
+  console.log("  addPeer(ip)");
+  console.log("  unlockAcc(i,j)");
 }
 //Check total balance of all accounts
 function checkAllBalances() {
@@ -19,10 +23,40 @@ function checkAllBalances() {
 };
 
 //mine 1 block
-function mineBlocks(){
-  miner.start(1);
-  admin.sleepBlocks(1);
-  miner.stop();
+function mineBlock(){
+  if(txpool.status.pending > 0){
+    miner.start(1);
+    admin.sleepBlocks(1);
+    miner.stop();
+  }else {
+    console.log("Nothing to mine");
+  }
+
+}
+//mine i blocks
+function mineBlocks(i){
+  if(txpool.status.pending > 0){
+    miner.start(1);
+    admin.sleepBlocks(i);
+    miner.stop();
+  }else {
+    console.log("Nothing to mine");
+  }
+}
+
+//mine interval
+var m;
+function mineInterval(i) {
+  m = setInterval(function() {
+        miner.start(1);
+        admin.sleepBlocks(1);
+        miner.stop();
+        console.log("Break");
+      }, i*1000);
+
+}
+function mineStop(){
+  clearInterval(m);
 }
 
 //Check transactions in every Block
@@ -65,6 +99,6 @@ function addPeer(input){
   admin.addPeer("enode://e8f4778e06bb937b13d49c7fd696aaa80ed780ec5c587bf2cd4442d9c08a60772b4fb3d0ad732818c179b1b9d77da2d062733046ebf1b2cd2bdc082820f53cb6@"+ip+":30303?discport=0");
 }
 
-function unlockAcc(i) {
-  personal.unlockAccount(eth.accounts[i]);
+function unlockAcc(i,j) {
+  personal.unlockAccount(eth.accounts[i],j,3600);
 }
